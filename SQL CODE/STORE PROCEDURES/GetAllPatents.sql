@@ -1,0 +1,5 @@
+CREATE PROCEDURE GetAllPatents
+AS
+BEGIN
+SELECT*FROM Patents 
+END

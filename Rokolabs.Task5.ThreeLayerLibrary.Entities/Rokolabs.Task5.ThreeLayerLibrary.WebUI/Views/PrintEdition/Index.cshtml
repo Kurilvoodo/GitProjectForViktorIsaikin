@@ -1,0 +1,166 @@
+﻿@using Rokolabs.Task5.ThreeLayerLibrary.Entities;
+@using Rokolabs.Task5.ThreeLayerLibrary.Ioc;
+@using Rokolabs.Task5.ThreeLayerLibrary.BLL.Interfaces;
+@using Ninject;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var _authorLogic = NinjaDependencryResolver.Kernel.Get<IAuthorLogic>();
+    var _newspaperLogic = NinjaDependencryResolver.Kernel.Get<INewspaperLogic>();
+    var _newspaperIssueLogic = NinjaDependencryResolver.Kernel.Get<INewspaperIssueLogic>();
+}
+@model IEnumerable<Rokolabs.Task5.ThreeLayerLibrary.Entities.PrintEdition>
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    @Html.Action("ShowLinksForAdmin", "PrintEdition")
+}
+<p>@Html.ActionLink("Download The Catalog in xlsx Format", "DownloadTheCatalog")</p>
+@using (Html.BeginForm("SortedPaging", "PrintEdition", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        <h4> Filter the Catatlog</h4>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Author Name:</label>
+                <input type="text" class="form-control" name="partAuthorName" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label>Sort argument: asc or desc</label>
+                <input type="text" class="form-control" name="sortString" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label>Title</label>
+                <input type="text" class="form-control" name="partTitle">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+        <hr />
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            <p>Name</p>
+        </th>
+        <th>
+            <p>Identity</p>
+        </th>
+        <th>
+            <p>Number Of Pages</p>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item is Book)
+        {
+            Book _book = (Book)item;
+            <tr>
+                <td>
+                    @{
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        foreach (var author in @_authorLogic.GetAuthorByBookId(_book.Id))
+                        {
+                            string authorName = author.FirstName[0] + ". ";
+                            sb.Append(@authorName);
+                            sb.Append(" ");
+                            sb.Append(@author.LastName);
+                            sb.Append(" ");
+                        }
+                        sb.Append(_book.Title);
+                        sb.Append(" ");
+                        sb.Append(_book.PublicationYear);
+                        sb.Append(" ");
+                        @Html.ActionLink(sb.ToString(), "Details", "Book", new { id = item.Id }, null)
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink(_book.ISBN, "Details", "Book", new { id = item.Id }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(_book.NumberOfPages.ToString(), "Details", "Book", new { id = item.Id }, null)
+                </td>
+                <td>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Book", new { id = item.Id }, null); <div>|</div>
+                        @Html.ActionLink("Delete", "Delete", "Book", new { id = item.Id }, null);
+                    }
+                </td>
+            </tr>
+        }
+        if (item is Newspaper)
+        {
+            Newspaper _newspaper = (Newspaper)item;
+            foreach (var issueItem in _newspaperIssueLogic.GetAllNewspaperIssuesByNewspaperId(item.Id))
+            {
+                _newspaper.NewspaperIssues.Add(issueItem);
+            }
+            foreach (var newspaperIssue in _newspaper.NewspaperIssues)
+            {
+                <tr>
+                    <td>
+                        @{
+                            string typing = _newspaper.Title + newspaperIssue.ToString();
+                            @Html.ActionLink(typing, "Details", "NewspaperIssue", new { issueId = newspaperIssue.Id }, null);
+                        }
+                    </td>
+                    <td>
+                        @Html.ActionLink(_newspaper.ISSN, "Details", "NewspaperIssue", new { issueId = newspaperIssue.Id }, null)
+                    </td>
+                    <td>
+                        @Html.ActionLink(newspaperIssue.NumberOfPages.ToString(), "Details", "NewspaperIssue", new { issueId = newspaperIssue.Id }, null)
+                    </td>
+                    <td>
+                        @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Edit", "Edit", "NewspaperIssue", new { id = item.Id }, null); <div>|</div>
+                            @Html.ActionLink("Delete", "Delete", "NewspaperIssue", new { id = newspaperIssue.Id }, null);
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        if (item is Patent)
+        {
+            Patent _patent = (Patent)item;
+            <tr>
+                <td>
+                    @{
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        sb.Append(_patent.Title);
+                        sb.Append(" ");
+                        sb.Append("from (");
+                        sb.Append(_patent.PublicationYear);
+                        sb.Append(") ");
+                        @Html.ActionLink(sb.ToString(), "Details", "Patent", new { id = item.Id }, null)
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink(_patent.RegistrationNumber.ToString(), "Details", "Patent", new { id = item.Id }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(_patent.NumberOfPages.ToString(), "Details", "Patent", new { id = item.Id }, null)
+                </td>
+                <td>
+                    @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Patent", new { id = item.Id }, null); <div>|</div>
+                        @Html.ActionLink("Delete", "Delete", "Patent", new { id = item.Id }, null);
+                    }
+                </td>
+            </tr>
+        }
+
+    }
+</table>

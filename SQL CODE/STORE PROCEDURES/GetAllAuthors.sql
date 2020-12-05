@@ -1,0 +1,5 @@
+CREATE PROCEDURE GetAllAuthors
+AS
+BEGIN
+SELECT* FROM Authors
+END

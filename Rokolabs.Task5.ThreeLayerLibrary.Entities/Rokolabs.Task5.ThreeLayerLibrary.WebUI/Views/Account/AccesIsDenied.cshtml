@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Acces is denied";
+}
+
+<div>
+    <h4>Acces is Denied</h4>
+    <p>You don't have enough permissions</p>
+    @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("CommonUser"))
+    {
+        @Html.ActionLink("Switch Account", "SwitchAccount", "Account");
+    }
+    @if (!User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Login", "Login", "Account");
+    }
+
+    <hr />
+    <p>
+        <img src="~/Content/LetMeInMeme.png" />
+    </p>
+</div>

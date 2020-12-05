@@ -1,0 +1,65 @@
+﻿@model Rokolabs.Task5.ThreeLayerLibrary.WebUI.Models.ViewModels.Newspapers.ReadNewspaperVM
+
+<h3>Are you sure you want to delete the whole newspaper from the catalog?</h3>
+<div>
+    <h4>ReadNewspaperVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublicationYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annotation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annotation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceOfPublication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfPublication)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublishingHouse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublishingHouse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISSN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISSN)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index", "PrintEdition")
+        </div>
+    }
+</div>

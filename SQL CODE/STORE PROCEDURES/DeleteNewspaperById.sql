@@ -1,0 +1,6 @@
+CREATE PROCEDURE DeleteNewspaperById
+@Id INT
+AS
+BEGIN
+DELETE FROM Newspapers WHERE Id = @Id
+END

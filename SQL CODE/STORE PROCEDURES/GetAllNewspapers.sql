@@ -1,0 +1,5 @@
+CREATE PROCEDURE GetAllNewspapers
+AS
+BEGIN
+SELECT * FROM Newspapers
+END

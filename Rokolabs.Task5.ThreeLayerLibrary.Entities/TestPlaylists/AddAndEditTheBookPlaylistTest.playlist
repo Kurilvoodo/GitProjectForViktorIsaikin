@@ -1,0 +1,36 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="Rokolabs.Task5.ThreeLayerLibrary.BLL.Tests" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="Rokolabs.Task5.ThreeLayerLibrary.BLL.Tests" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="BookTests" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Rokolabs.Task5.ThreeLayerLibrary.BLL.Tests.BookTests.AddBookTest" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddBookTest" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="Rokolabs.Task5.ThreeLayerLibrary.BLL.Tests.BookTests.EditBook" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="EditBook" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>

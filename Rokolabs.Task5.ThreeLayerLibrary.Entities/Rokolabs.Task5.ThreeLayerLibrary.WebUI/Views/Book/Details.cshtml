@@ -1,0 +1,90 @@
+﻿@using Rokolabs.Task5.ThreeLayerLibrary.BLL.Interfaces;
+@using Rokolabs.Task5.ThreeLayerLibrary.Ioc;
+@using Ninject;
+@model Rokolabs.Task5.ThreeLayerLibrary.WebUI.Models.ViewModels.Books.ReadBookVM
+
+<div>
+    <h4>ReadBookVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublicationYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annotation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annotation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceOfPublication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfPublication)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublishingHouse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublishingHouse)
+        </dd>
+
+        <dt>
+            Authors:
+        </dt>
+
+        <dd>
+            @{
+                var _authorLogic = NinjaDependencryResolver.Kernel.Get<IAuthorLogic>();
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                foreach (var author in _authorLogic.GetAuthorByBookId(Model.Id))
+                {
+                    Model.AuthorsId.Add(author.Id);
+                    sb.Append(author.FirstName);
+                    sb.Append(" ");
+                    sb.Append(@author.LastName);
+                    sb.Append(" ");
+                }
+                <p>@sb.ToString()</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfPages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfPages)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "PrintEdition") |
+    @Html.ActionLink("Delete the book", "Delete", "Book", new { id = Model.Id }, null)
+</p>

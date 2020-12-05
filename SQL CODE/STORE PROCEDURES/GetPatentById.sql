@@ -1,0 +1,6 @@
+CREATE PROCEDURE GetPatentById
+@Id INT
+AS
+BEGIN
+SELECT * FROM Patents WHERE Id = @Id
+END

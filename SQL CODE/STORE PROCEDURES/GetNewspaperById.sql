@@ -1,0 +1,6 @@
+CREATE PROCEDURE GetNewspaperById
+@Id INT
+AS
+BEGIN
+SELECT * FROM Newspapers WHERE Id = @Id
+END

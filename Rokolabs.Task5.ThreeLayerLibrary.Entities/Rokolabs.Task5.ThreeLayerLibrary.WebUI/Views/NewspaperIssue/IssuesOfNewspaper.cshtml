@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Rokolabs.Task5.ThreeLayerLibrary.WebUI.Models.ViewModels.NewspaperIssues.ReadNewspaperIssueVM>
+<div>
+    <h4>Read Newspaper Issues</h4>
+    <table class="table">
+        <tr>
+            <th>
+                <p>Number</p>
+            </th>
+            <th>
+                <p>Release Date</p>
+            </th>
+            <th>
+                <p>Number Of Pages</p>
+            </th>
+            <th>
+                Operations
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.ReleaseNumber
+                </td>
+                <td>
+                    @item.ReleaseDate
+                </td>
+                <td>
+                    @item.NumberOfPages
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "NewspaperIssue", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "NewspaperIssue", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @*@Html.ActionLink("Delete the whole newspaper", "Delete", "Newspaper")*@
+    @Html.ActionLink("Back to List", "Index", "PrintEdition")
+</p>

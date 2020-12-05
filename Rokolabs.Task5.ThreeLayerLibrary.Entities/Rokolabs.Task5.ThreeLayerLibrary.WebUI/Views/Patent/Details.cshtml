@@ -1,0 +1,98 @@
+﻿@using Rokolabs.Task5.ThreeLayerLibrary.BLL.Interfaces;
+@using Rokolabs.Task5.ThreeLayerLibrary.Ioc;
+@using Ninject;
+@model Rokolabs.Task5.ThreeLayerLibrary.WebUI.Models.ViewModels.Patents.ReadPatentVM
+
+<div>
+    <h4>ReadPatentVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublicationYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annotation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annotation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegistrationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfApplication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfApplication)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfPages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfPages)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublicationDate)
+        </dd>
+
+        <dt>
+            Atuhors:
+        </dt>
+
+        <dd>
+            @{
+                var _authorLogic = NinjaDependencryResolver.Kernel.Get<IAuthorLogic>();
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                foreach (var author in _authorLogic.GetAuthorByPatentId(Model.Id))
+                {
+                    Model.AuthorsId.Add(author.Id);
+                    string authorName = author.FirstName[0] + ". ";
+                    sb.Append(@authorName);
+                    sb.Append(" ");
+                    sb.Append(@author.LastName);
+                    sb.Append(" ");
+                }
+                <p>@sb.ToString()</p>
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "PrintEdition")
+</p>

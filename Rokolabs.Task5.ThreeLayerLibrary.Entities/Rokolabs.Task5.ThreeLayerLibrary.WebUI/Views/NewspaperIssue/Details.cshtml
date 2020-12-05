@@ -1,0 +1,44 @@
+﻿@model Rokolabs.Task5.ThreeLayerLibrary.WebUI.Models.ViewModels.NewspaperIssues.ReadNewspaperIssueVM
+
+<div>
+    <h4>ReadNewspaperIssueVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfPages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfPages)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NewspaperId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NewspaperId)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Show All Newspaper Issues", "IssuesOfNewspaper", "NewspaperIssue", new { newspaperId = Model.NewspaperId }, null) |
+    @Html.ActionLink("Delete  newspaper issue", "Delete", "NewspaperIssue", new { id = Model.Id }, null) |
+    @Html.ActionLink("Back to List", "Index", "PrintEdition")
+</p>

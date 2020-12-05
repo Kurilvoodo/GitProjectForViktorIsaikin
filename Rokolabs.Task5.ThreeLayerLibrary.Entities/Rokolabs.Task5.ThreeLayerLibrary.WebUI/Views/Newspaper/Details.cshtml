@@ -1,0 +1,59 @@
+﻿@model Rokolabs.Task5.ThreeLayerLibrary.WebUI.Models.ViewModels.Newspapers.ReadNewspaperVM
+
+<div>
+    <h4>ReadNewspaperVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublicationYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annotation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annotation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceOfPublication)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PlaceOfPublication)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublishingHouse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublishingHouse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISSN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISSN)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Delete Newspaper", "Delete", "Newspaper")
+    @Html.ActionLink("Back to List", "Index", "PrintEdition")
+</p>
